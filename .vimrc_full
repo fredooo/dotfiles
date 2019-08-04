@@ -1,0 +1,167 @@
+"
+" .vimrc
+"
+
+" Use imporved vi
+set nocompatible
+
+"
+" Plugins
+"
+
+" Autoinstall plugin manager
+if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+   	echo "Downloading junegunn/vim-plug to manage plugins..."
+    silent !mkdir -p ~/.config/nvim/autoload
+    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+endif
+
+call plug#begin('.config/nvim/plugged')
+Plug 'scrooloose/nerdtree'
+Plug 'bling/vim-airline'
+Plug 'PotatoesMaster/i3-vim-syntax'
+call plug#end()
+
+
+"
+" General editor configuration
+"
+
+" Look and behavior
+let g:airline_powerline_fonts = 1
+
+filetype plugin indent on
+syntax on
+
+set wildmode=longest,list,full
+
+" Do not continue comments in after newline
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+set number
+set relativenumber
+
+set ruler
+set showmode
+set showcmd
+set laststatus=2
+set completeopt=menu
+
+set history=1000
+set wildmenu
+set wildmode=list:longest
+
+set listchars=tab:▸\ ,trail:·,eol:¶,extends:>,precedes:<,nbsp:+
+set backspace=2
+set display=lastline
+
+set timeout
+set timeoutlen=1000
+set ttimeout
+set ttimeoutlen=100
+
+set nowrap
+set scrolloff=1
+set sidescrolloff=5
+
+set nomodeline
+set clipboard=unnamed
+set visualbell
+set lazyredraw
+set shortmess+=I
+
+" Folding options
+set nofoldenable
+
+" Search options
+set hlsearch
+set ignorecase
+set smartcase
+
+" File related options
+set autoread
+set hidden
+set encoding=utf-8
+set ffs=unix,dos,mac
+
+" Backup options
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Indentation
+set tabstop=4
+set shiftwidth=4
+set shiftround
+set softtabstop=4
+set expandtab
+set autoindent
+set smartindent
+set smarttab
+
+" Statusbar
+set statusline=%t\ %m%r%h\ [%{&ff}]\ %y%=%c,%l/%L\ %p%%
+
+" Only highlight lines with over 80 characters
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
+
+"
+" Key mapping
+"
+
+let mapleader = ','
+
+" Unbind the cursor keys in insert, normal and visual mode
+for prefix in ['i', 'n', 'v']
+    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+        exe prefix . "noremap " . key . " <Nop>"
+    endfor
+endfor
+
+" Exit insert mode with kj
+inoremap <esc> <nop>
+inoremap kj <esc>
+
+" Quick .vimrc access
+nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+nnoremap <leader>vs :source $MYVIMRC<cr>
+
+" Window navigation
+nnoremap <leader>w <C-w><C-w>
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>h <C-w>h
+nnoremap <leader>l <C-w>l
+nnoremap <leader>y <C-w>v<C-w>l
+nnoremap <leader>x <C-w>s<C-w>j
+nnoremap <leader>d <C-w>4<
+nnoremap <leader>s <C-w>4>
+nnoremap <leader>q <C-w>2+
+nnoremap <leader>a <C-w>2-
+
+" Tab navigation
+nnoremap <leader>. :tabnew<CR>
+nnoremap <leader><leader> :tabnext<CR>
+nnoremap <leader>m :tabprevious<CR>
+nnoremap <leader>- :tabclose<CR>
+nnoremap <leader>o :tabonly<CR>
+nnoremap <leader>n :tabmove
+
+" Mappings for F1-F12
+nnoremap <silent> <F5> :set relativenumber!<CR>
+nnoremap <F6> :set list!<CR>
+nnoremap <silent> <F7> :call <SID>StripTrailingWhitespaces()<CR>
+nnoremap <F8> :NERDTreeToggle<CR>
+
+"
+" Custom functions
+"
+
+" Key to strip trailing whitespaces
+function! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfunction

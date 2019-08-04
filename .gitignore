@@ -1,0 +1,6 @@
+.config/mutt
+.config/nvim/autoload
+.config/nvim/plugged
+
+package-list.txt
+ops.sh

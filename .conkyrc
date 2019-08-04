@@ -1,0 +1,114 @@
+conky.config = {
+alignment = "top_middle",
+background = true,
+border_width = 0,
+cpu_avg_samples = 2,
+default_color = "white",
+default_shade_color = "black",
+draw_borders = false,
+draw_graph_borders = true,
+draw_outline = false,
+draw_shades = true,
+use_xft = true,
+font = "DejaVu Sans:size=8",
+gap_x = -190,
+gap_y = 5,
+minimum_width = 250,
+net_avg_samples = 2,
+no_buffers = false,
+double_buffer = true,
+out_to_console = false,
+out_to_stderr = false,
+extra_newline = false,
+own_window = true,
+own_window_class = "Conky",
+own_window_transparent = true,
+own_window_type = "desktop",
+own_window_hints = "undecorated,below,sticky,skip_taskbar,skip_pager",
+total_run_times = 0,
+stippled_borders = 0,
+update_interval = 1.0,
+uppercase = false,
+use_spacer = "none",
+show_graph_scale = false,
+show_graph_range = false,
+}
+
+conky.text = [[
+${font DejaVu Sans:style=bold:size=32}${color #4080fb}$alignc${time %T}$font
+
+${font DejaVu Sans:style=bold:size=16}$alignc${time %e. %B %G}$font
+
+${font DejaVu Sans Mono:style=bold:size=14}${color #4080fb}SYSTEM $hr$font$color
+
+$sysname $kernel $alignr $machine
+Host: $alignr $nodename
+Uptime: $alignr $uptime
+
+${font DejaVu Sans Mono:style=bold:size=14}${color #4080fb}PROCESSOR $hr$font$color
+
+CPU Usage: ${cpu cpu0}% ${cpubar cpu0}
+${font}${cpugraph cpu0 25,250}
+
+Core 1:$alignr${cpu cpu1}%
+${cpubar cpu1}
+Core 2:$alignr${cpu cpu2}%
+${cpubar cpu2}
+Core 3:$alignr${cpu cpu3}%
+${cpubar cpu3}
+Core 4:$alignr${cpu cpu4}%
+${cpubar cpu4}
+Core 5:$alignr${cpu cpu5}%
+${cpubar cpu5}
+Core 6:$alignr${cpu cpu6}%
+${cpubar cpu6}
+Core 7:$alignr${cpu cpu7}%
+${cpubar cpu7}
+Core 8:$alignr${cpu cpu8}%
+${cpubar cpu8}
+
+Processes: $processes ($running_processes)  
+Threads: $threads ($running_threads)
+
+${font DejaVu Sans Mono:style=bold:size=14}${color #4080fb}RAM / SWAP $hr$font$color
+
+RAM$alignc$mem / $memmax$alignr$memperc%
+$membar
+
+SWAP$alignc$swap / $swapmax$alignr$swapperc%
+$swapbar
+
+${font DejaVu Sans Mono:style=bold:size=14}${color #4080fb}HARD DISK $hr$font$color
+
+/
+$font${fs_used /} / ${fs_size /}$alignr${fs_used_perc /}%
+${fs_bar /}
+
+/home
+${fs_used /home} / ${fs_size /home}$alignr${fs_used_perc /home}%
+${fs_bar /home}
+
+${font DejaVu Sans Mono:style=bold:size=14}${color #4080fb}NETWORK $hr$font$color
+
+IP Address:$alignr${addr wlp2s0}
+SSID:$alignr${wireless_essid wlp2s0}
+Connection Quality:$alignr${wireless_link_qual wlp2s0}%
+
+DLS:${downspeed wlp2s0}/s$alignr${totaldown wlan0}
+${downspeedgraph wlp2s0 25,250}
+ULS:${upspeed wlp2s0}/s $alignr${totalup wlan0}
+${upspeedgraph wlp2s0 25,250}
+
+${font DejaVu Sans Mono:style=bold:size=14}${color #4080fb}TOP PROCESSES $hr$font$color
+
+${top name 1}$alignr${top cpu 1}%
+${top name 2}$alignr${top cpu 2}%
+${top name 3}$alignr${top cpu 3}%
+${top name 4}$alignr${top cpu 4}%
+${top name 5}$alignr${top cpu 5}%
+${top name 6}$alignr${top cpu 6}%
+${top name 7}$alignr${top cpu 7}%
+#${top name 8}$alignr${top cpu 8}%
+#${top name 9}$alignr${top cpu 9}%
+#${top name 10}$alignr${top cpu 10}%
+]]

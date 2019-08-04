@@ -1,0 +1,1 @@
+/home/fredo/git/dotfiles/.vimrc
